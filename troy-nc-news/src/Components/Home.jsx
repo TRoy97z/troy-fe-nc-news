@@ -20,7 +20,7 @@ class Home extends React.Component {
       return (
         <ul>
           {articles.map(article => {
-            return <ArticleCard article={article} />;
+            return <ArticleCard key={article.title} article={article} />;
           })}
         </ul>
       );

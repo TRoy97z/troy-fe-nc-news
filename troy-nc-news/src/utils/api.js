@@ -9,7 +9,17 @@ export const getPopularArticles = async () => {
   return data;
 };
 
-export const getArticles = async comment_count => {
+export const getArticles = async () => {
   const { data } = await request.get("/articles");
   return data;
+};
+
+export const getArticleById = async id => {
+  const { data } = await request.get(`/articles/${id}`);
+  return data.article;
+};
+
+export const getCommentsByArticleId = async id => {
+  const { data } = await request.get(`/articles/${id}/comments`);
+  return data.comments;
 };

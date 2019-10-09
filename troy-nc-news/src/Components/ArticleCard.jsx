@@ -2,8 +2,6 @@ import React from "react";
 import { Link } from "@reach/router";
 
 class ArticleCard extends React.Component {
-  state = {};
-
   render() {
     const { article } = this.props;
     const {
@@ -15,15 +13,18 @@ class ArticleCard extends React.Component {
       created_at
     } = article;
     return (
-      <Link to={`/articles/${article_id}`}>
-        <li key={title}>
-          <h3>{title}</h3>
-          <p>
-            votes: {votes} || by: {author} || comments: {comment_count}
-          </p>
-          <p>posted: {created_at}</p>
-        </li>
-      </Link>
+      <li key={title}>
+        {" "}
+        <Link to={`/articles/${article_id}`}>
+          <h2>{title}</h2>
+        </Link>
+        <h4>
+          votes: {votes} || comments: {comment_count}
+        </h4>
+        <h5>
+          Posted By: {author} || {created_at}
+        </h5>
+      </li>
     );
   }
 }

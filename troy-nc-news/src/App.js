@@ -1,10 +1,11 @@
 import React from "react";
-import Header from "./Components/Header";
-import Nav from "./Components/Nav";
-import ArticleList from "./Components/ArticlesList";
 import "./App.css";
 import { Router } from "@reach/router";
+import Header from "./Components/Header";
+import Nav from "./Components/Nav";
 import Home from "./Components/Home";
+import ArticleList from "./Components/ArticlesList";
+import SingleArticle from "./Components/SingleArticle";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
       <Router>
         <Home path="/" />
         <ArticleList path="/articles" />
+        <SingleArticle path="/articles/:article_id" />
       </Router>
     </main>
   );
