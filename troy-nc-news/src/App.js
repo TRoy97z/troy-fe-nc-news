@@ -6,19 +6,24 @@ import Nav from "./Components/Nav";
 import Home from "./Components/Home";
 import ArticleList from "./Components/ArticlesList";
 import SingleArticle from "./Components/SingleArticle";
+import User from "./Components/User";
 
-function App() {
-  return (
-    <main className="App">
-      <Header />
-      <Nav />
-      <Router>
-        <Home path="/" />
-        <ArticleList path="/articles" />
-        <SingleArticle path="/articles/:article_id" />
-      </Router>
-    </main>
-  );
+class App extends React.Component {
+  render() {
+    return (
+      <main className="App">
+        <Header />
+        <Nav />
+        <Router>
+          <Home path="/" />
+          <ArticleList path="/articles" />
+          <ArticleList path="/articles/topics/:topic" />
+          <SingleArticle path="/articles/:article_id" />
+          <User path="/users/:username" />
+        </Router>
+      </main>
+    );
+  }
 }
 
 export default App;

@@ -1,6 +1,5 @@
 import React from "react";
 import ArticleCard from "./ArticleCard";
-// import { Link } from "@reach/router";
 import * as api from "../utils/api";
 
 class ArticleList extends React.Component {
@@ -8,11 +7,23 @@ class ArticleList extends React.Component {
     articles: [],
     isLoading: true
   };
+
   componentDidMount() {
-    api.getArticles().then(({ articles }) => {
+    const { topic } = this.props;
+    api.getArticles(topic).then(({ articles }) => {
       this.setState({ articles, isLoading: false });
     });
   }
+
+  componentDidUpdate(prevProps) {
+    const { topic } = this.props;
+    if (prevProps.topic !== topic) {
+      api.getArticles(topic).then(({ articles }) => {
+        this.setState({ articles: articles, isLoading: false });
+      });
+    }
+  }
+
   render() {
     const { articles, isLoading } = this.state;
     if (isLoading) {

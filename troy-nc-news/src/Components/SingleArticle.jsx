@@ -1,6 +1,7 @@
 import React from "react";
 import * as api from "../utils/api";
 import CommentsList from "../Components/CommentsList";
+import Voter from "./Voter";
 
 class SingleArticle extends React.Component {
   state = {
@@ -27,7 +28,10 @@ class SingleArticle extends React.Component {
             Posted By: {author} || {created_at}
           </h5>
           <p>{body}</p>
-          <p>votes:{votes}</p>
+          <p>
+            {" "}
+            <Voter /> votes:{votes}
+          </p>
           <ul>
             <CommentsList key={article.article_id} article_id={article_id} />
           </ul>

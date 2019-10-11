@@ -12,17 +12,21 @@ class Home extends React.Component {
       this.setState({ articles, isLoading: false });
     });
   }
+
   render() {
     const { articles, isLoading } = this.state;
     if (isLoading) {
       return <h2>Loading...</h2>;
     } else
       return (
-        <ul>
-          {articles.map(article => {
-            return <ArticleCard key={article.title} article={article} />;
-          })}
-        </ul>
+        <React.Fragment>
+          <h2>Popular Articles</h2>
+          <ul>
+            {articles.map(article => {
+              return <ArticleCard key={article.title} article={article} />;
+            })}
+          </ul>
+        </React.Fragment>
       );
   }
 }

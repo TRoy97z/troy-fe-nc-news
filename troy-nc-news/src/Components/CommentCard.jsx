@@ -1,4 +1,5 @@
 import React from "react";
+import Voter from "./Voter";
 
 class CommentCard extends React.Component {
   state = {};
@@ -12,6 +13,7 @@ class CommentCard extends React.Component {
         <h5>
           Posted By: {author} || {created_at} || Votes: {votes}
         </h5>
+        <Voter />
       </li>
     );
   }
