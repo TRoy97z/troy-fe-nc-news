@@ -1,37 +1,41 @@
 import React from "react";
+import * as api from "../utils/api";
 
 class Voter extends React.Component {
-  state = { voteInc: false, voteDec: false };
+  state = { voteUpdate: 0 };
 
-  incVote = () => {
-    const { articleVoteHandler } = this.props;
-    const { votedUp } = this.state;
-    if (!votedUp) {
-      articleVoteHandler(1);
-      this.setState({ votedUp: true });
-    } else {
-      articleVoteHandler(-1);
-      this.setState({ votedUp: false });
-    }
-  };
+  handleVote = event => {
+    let vote = +event.target.id;
 
-  decVote = () => {
-    const { articleVoteHandler } = this.props;
-    const { votedDown } = this.state;
-    if (!votedDown) {
-      articleVoteHandler(-1);
-      this.setState({ votedDown: true });
+    this.setState(prevState => {
+      return { voteUpdate: prevState.voteUpdate + vote };
+    });
+
+    if (this.props.comment_id) {
+      api.patchCommentVotes(this.props.comment_id, vote);
     } else {
-      articleVoteHandler(1);
-      this.setState({ votedDown: false });
+      api.patchArticleVotes(this.props.article_id, vote);
     }
   };
 
   render() {
     return (
       <React.Fragment>
-        <button onClick={this.incVote}>Vote Up</button>
-        <button onClick={this.decVote}>Vote Down</button>
+        <button
+          id={1}
+          onClick={this.handleVote}
+          disabled={this.state.voteUpdate > 0}
+        >
+          Vote Up
+        </button>
+        <button
+          id={-1}
+          onClick={this.handleVote}
+          disabled={this.state.voteUpdate < 0}
+        >
+          Vote Down
+        </button>
+        <p> Votes: {this.props.votes + this.state.voteUpdate}</p>
       </React.Fragment>
     );
   }

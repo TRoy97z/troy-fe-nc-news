@@ -1,28 +1,46 @@
 import React from "react";
 import ArticleCard from "./ArticleCard";
 import * as api from "../utils/api";
+import Sorter from "./Sorter";
+import ArticleOrder from "./ArticleOrder";
 
 class ArticleList extends React.Component {
   state = {
     articles: [],
-    isLoading: true
+    isLoading: true,
+    sortQuery: null,
+    orderQuery: "desc"
   };
 
   componentDidMount() {
     const { topic } = this.props;
-    api.getArticles(topic).then(({ articles }) => {
+    const { sortQuery, orderQuery } = this.state;
+    api.getArticles(topic, sortQuery, orderQuery).then(({ articles }) => {
       this.setState({ articles, isLoading: false });
     });
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps, prevState) {
     const { topic } = this.props;
-    if (prevProps.topic !== topic) {
-      api.getArticles(topic).then(({ articles }) => {
+    const { sortQuery, orderQuery } = this.state;
+    if (
+      prevProps.topic !== topic ||
+      prevState.sortQuery !== sortQuery ||
+      prevState.orderQuery !== orderQuery
+    ) {
+      api.getArticles(topic, sortQuery, orderQuery).then(({ articles }) => {
         this.setState({ articles: articles, isLoading: false });
       });
     }
   }
+
+  updateSortQuery = query => {
+    this.setState({ sortQuery: query });
+  };
+
+  updateOrderQuery = query => {
+    this.setState({ orderQuery: query });
+  };
 
   render() {
     const { articles, isLoading } = this.state;
@@ -30,11 +48,15 @@ class ArticleList extends React.Component {
       return <h2>Loading...</h2>;
     } else
       return (
-        <ul>
-          {articles.map(article => {
-            return <ArticleCard key={article.article_id} article={article} />;
-          })}
-        </ul>
+        <React.Fragment>
+          <Sorter updateSortQuery={this.updateSortQuery} />
+          <ArticleOrder updateOrderQuery={this.updateOrderQuery} />
+          <ul>
+            {articles.map(article => {
+              return <ArticleCard key={article.article_id} article={article} />;
+            })}
+          </ul>
+        </React.Fragment>
       );
   }
 }

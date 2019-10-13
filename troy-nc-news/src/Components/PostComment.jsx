@@ -14,12 +14,15 @@ class PostComment extends React.Component {
 
   handleSubmit = event => {
     event.preventDefault();
-    const body = this.state;
-    const { article_id, fetchCommentsByArticleId } = this.props;
+    const { article_id, addComment } = this.props;
+    const newComment = {
+      username: this.state.username,
+      body: this.state.body
+    };
     api
-      .postCommentByArticleId(article_id, body)
-      .then(() => {
-        return fetchCommentsByArticleId();
+      .postCommentByArticleId(article_id, newComment)
+      .then(newComment => {
+        addComment(newComment);
       })
       .then(() => {
         this.setState({ body: "" });

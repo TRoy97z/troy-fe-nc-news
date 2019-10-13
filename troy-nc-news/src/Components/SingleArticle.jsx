@@ -28,10 +28,7 @@ class SingleArticle extends React.Component {
             Posted By: {author} || {created_at}
           </h5>
           <p>{body}</p>
-          <p>
-            {" "}
-            <Voter /> votes:{votes}
-          </p>
+          <Voter votes={votes} article_id={article_id} />
           <ul>
             <CommentsList key={article.article_id} article_id={article_id} />
           </ul>

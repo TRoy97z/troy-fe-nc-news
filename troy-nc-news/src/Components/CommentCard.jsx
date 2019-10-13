@@ -1,19 +1,30 @@
 import React from "react";
 import Voter from "./Voter";
+import * as api from "../utils/api";
 
 class CommentCard extends React.Component {
-  state = {};
+  state = { deleted: false };
+
+  removeComment = () => {
+    const { comment_id } = this.props.comment;
+    this.setState({ deleted: true });
+    api.deleteCommentByCommentId(comment_id).catch(console.log);
+  };
 
   render() {
+    const { deleted } = this.state;
     const { comment } = this.props;
-    const { created_at, body, author, votes } = comment;
+    const { created_at, body, author, votes, comment_id } = comment;
     return (
       <li key={created_at}>
         <h4>{body}</h4>
         <h5>
-          Posted By: {author} || {created_at} || Votes: {votes}
+          Posted By: {author} || {created_at}
         </h5>
-        <Voter />
+        <Voter votes={votes} comment_id={comment_id} />
+        <button onClick={this.removeComment}>
+          {deleted ? "Comment Deleted" : "Deleted"}
+        </button>
       </li>
     );
   }

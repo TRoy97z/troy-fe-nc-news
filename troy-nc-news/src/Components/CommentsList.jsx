@@ -14,10 +14,14 @@ class CommentsList extends React.Component {
     });
   }
 
-  fetchCommentsByArticleId = () => {
-    const { article_id } = this.props;
-    api.getCommentsByArticleId(article_id).then(comments => {
-      this.setState({ comments });
+  addComment = newComment => {
+    this.setState(prevState => {
+      const newState = prevState.comments.map(comment => {
+        return { ...comment };
+      });
+
+      newState.unshift(newComment);
+      return { comments: newState };
     });
   };
 
@@ -26,13 +30,16 @@ class CommentsList extends React.Component {
     const { article_id } = this.props;
     return (
       <React.Fragment>
-        <PostComment
-          article_id={article_id}
-          fetchCommentsByArticleId={this.fetchCommentsByArticleId}
-        />
+        <PostComment article_id={article_id} addComment={this.addComment} />
         <ul>
           {comments.map(comment => {
-            return <CommentCard key={comment.comment_id} comment={comment} />;
+            return (
+              <CommentCard
+                key={comment.comment_id}
+                comment={comment}
+                comments={comments}
+              />
+            );
           })}
         </ul>
       </React.Fragment>

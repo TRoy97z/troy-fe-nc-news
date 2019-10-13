@@ -9,8 +9,10 @@ export const getPopularArticles = async () => {
   return data;
 };
 
-export const getArticles = async topic => {
-  const { data } = await request.get("/articles", { params: { topic } });
+export const getArticles = async (topic, sort_by, order) => {
+  const { data } = await request.get("/articles", {
+    params: { topic, sort_by, order }
+  });
   return data;
 };
 
@@ -29,7 +31,7 @@ export const postCommentByArticleId = async (id, comment) => {
   return data.comment;
 };
 
-export const deleteComment = async id => {
+export const deleteCommentByCommentId = async id => {
   const { data } = await request.delete(`/comments/${id}`);
   return data;
 };
@@ -44,12 +46,12 @@ export const getUserByUsername = async username => {
   return data.user;
 };
 
-export const patchArticleVotes = async (inc_votes, id) => {
+export const patchArticleVotes = async (id, inc_votes) => {
   const { data } = await request.patch(`/articles/${id}`, { inc_votes });
   return data;
 };
 
-export const patchCommentVotes = async (inc_votes, id) => {
+export const patchCommentVotes = async (id, inc_votes) => {
   const { data } = await request.patch(`/comments/${id}`, { inc_votes });
   return data;
 };
