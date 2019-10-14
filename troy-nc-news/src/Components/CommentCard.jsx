@@ -1,6 +1,8 @@
 import React from "react";
 import Voter from "./Voter";
 import * as api from "../utils/api";
+import styles from "../styles/CommentCard.module.css";
+import Moment from "react-moment";
 
 class CommentCard extends React.Component {
   state = { deleted: false };
@@ -16,14 +18,14 @@ class CommentCard extends React.Component {
     const { comment } = this.props;
     const { created_at, body, author, votes, comment_id } = comment;
     return (
-      <li key={created_at}>
+      <li className={styles.card} key={created_at}>
         <h4>{body}</h4>
         <h5>
-          Posted By: {author} || {created_at}
+          Posted By: {author} || <Moment date={created_at} fromNow />
         </h5>
         <Voter votes={votes} comment_id={comment_id} />
         <button onClick={this.removeComment}>
-          {deleted ? "Comment Deleted" : "Deleted"}
+          {deleted ? "Comment Deleted" : "Delete"}
         </button>
       </li>
     );

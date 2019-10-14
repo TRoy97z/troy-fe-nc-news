@@ -1,0 +1,14 @@
+.card {
+  background-color: #ededed;
+  color: black;
+  padding: 2%;
+  margin: 5% 0%;
+  list-style-type: none;
+}
+
+.card button {
+  border: none;
+  size: 20%;
+  margin: 1%;
+  background-color: white;
+}

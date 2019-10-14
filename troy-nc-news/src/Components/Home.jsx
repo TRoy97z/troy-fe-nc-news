@@ -20,7 +20,7 @@ class Home extends React.Component {
     } else
       return (
         <React.Fragment>
-          <h2>Popular Articles</h2>
+          <h2>Read All About Our Popular Articles</h2>
           <ul>
             {articles.map(article => {
               return <ArticleCard key={article.title} article={article} />;

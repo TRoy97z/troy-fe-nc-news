@@ -1,7 +1,8 @@
 import React from "react";
 import { Link } from "@reach/router";
-// import * as api from "../utils/api";
+import styles from "../styles/ArticleCard.module.css";
 import Voter from "./Voter";
+import Moment from "react-moment";
 
 class ArticleCard extends React.Component {
   state = { votes: this.props.votes };
@@ -17,17 +18,17 @@ class ArticleCard extends React.Component {
     } = article;
 
     return (
-      <li key={title}>
+      <li className={styles.card} key={title}>
         {" "}
-        <Link to={`/articles/${article_id}`}>
+        <Link className={styles.title} to={`/articles/${article_id}`}>
           <h2>{title}</h2>
         </Link>
-        <>
+        <React.Fragment className={styles.tally}>
           <Voter votes={votes} article_id={article_id} />
           <p>Comments: {comment_count}</p>
-        </>
+        </React.Fragment>
         <h5>
-          Posted By: {author} || {created_at}
+          Posted By: {author} || <Moment date={created_at} fromNow />
         </h5>
       </li>
     );
