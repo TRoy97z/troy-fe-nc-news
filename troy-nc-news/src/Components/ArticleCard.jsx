@@ -20,15 +20,15 @@ class ArticleCard extends React.Component {
     return (
       <li className={styles.card} key={title}>
         {" "}
-        <Link className={styles.title} to={`/articles/${article_id}`}>
-          <h2>{title}</h2>
+        <Link className={styles.link} to={`/articles/${article_id}`}>
+          <h2 className={styles.title}>{title}</h2>
         </Link>
-        <React.Fragment className={styles.tally}>
+        <div className={styles.votes}>
           <Voter votes={votes} article_id={article_id} />
-          <p>Comments: {comment_count}</p>
-        </React.Fragment>
+        </div>
+        <p>Comments: {comment_count}</p>
         <h5>
-          Posted By: {author} || <Moment date={created_at} fromNow />
+          Posted By: {author} | <Moment date={created_at} fromNow />
         </h5>
       </li>
     );

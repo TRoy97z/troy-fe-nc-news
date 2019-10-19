@@ -1,14 +1,23 @@
+ul {
+  margin: 0px;
+  padding: 0px;
+}
 .card {
   background-color: #ededed;
   color: black;
-  padding: 2%;
-  margin: 5% 0%;
+  padding: 5%;
+  margin: 5%;
   list-style-type: none;
 }
 
 .card button {
-  border: none;
+  border: thin;
   size: 20%;
   margin: 1%;
   background-color: white;
+}
+
+.list {
+  margin: 14.75px;
+  /* padding: 14.75px; */
 }

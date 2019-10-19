@@ -21,7 +21,7 @@ class CommentCard extends React.Component {
       <li className={styles.card} key={created_at}>
         <h4>{body}</h4>
         <h5>
-          Posted By: {author} || <Moment date={created_at} fromNow />
+          Posted By: {author} | <Moment date={created_at} fromNow />
         </h5>
         <Voter votes={votes} comment_id={comment_id} />
         <button onClick={this.removeComment}>

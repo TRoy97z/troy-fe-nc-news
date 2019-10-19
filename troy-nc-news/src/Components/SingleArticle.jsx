@@ -2,6 +2,7 @@ import React from "react";
 import * as api from "../utils/api";
 import CommentsList from "../Components/CommentsList";
 import Voter from "./Voter";
+import Moment from "react-moment";
 
 class SingleArticle extends React.Component {
   state = {
@@ -25,7 +26,7 @@ class SingleArticle extends React.Component {
         <React.Fragment>
           <h2>{title}</h2>
           <h5>
-            Posted By: {author} || {created_at}
+            Posted By: {author} || <Moment date={created_at} fromNow />
           </h5>
           <p>{body}</p>
           <Voter votes={votes} article_id={article_id} />

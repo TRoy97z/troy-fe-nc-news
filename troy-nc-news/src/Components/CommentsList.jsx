@@ -1,7 +1,8 @@
 import React from "react";
 import CommentCard from "./CommentCard";
 import * as api from "../utils/api";
-import PostComment from "../Components/PostComment";
+import CommentForm from "../Components/CommentForm";
+import styles from "../styles/CommentCard.module.css";
 
 class CommentsList extends React.Component {
   state = {
@@ -29,8 +30,8 @@ class CommentsList extends React.Component {
     const { comments } = this.state;
     const { article_id } = this.props;
     return (
-      <React.Fragment>
-        <PostComment article_id={article_id} addComment={this.addComment} />
+      <section className={styles.list}>
+        <CommentForm article_id={article_id} addComment={this.addComment} />
         <ul>
           {comments.map(comment => {
             return (
@@ -42,7 +43,7 @@ class CommentsList extends React.Component {
             );
           })}
         </ul>
-      </React.Fragment>
+      </section>
     );
   }
 }

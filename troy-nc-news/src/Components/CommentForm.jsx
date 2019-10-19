@@ -1,7 +1,7 @@
 import React from "react";
 import * as api from "../utils/api";
 
-class PostComment extends React.Component {
+class CommentForm extends React.Component {
   state = {
     body: "",
     username: "grumpy19"
@@ -45,4 +45,4 @@ class PostComment extends React.Component {
     );
   }
 }
-export default PostComment;
+export default CommentForm;

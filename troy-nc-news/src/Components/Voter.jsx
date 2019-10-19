@@ -1,5 +1,6 @@
 import React from "react";
 import * as api from "../utils/api";
+import styles from "../styles/ArticleCard.module.css";
 
 class Voter extends React.Component {
   state = { voteUpdate: 0 };
@@ -20,7 +21,7 @@ class Voter extends React.Component {
 
   render() {
     return (
-      <React.Fragment>
+      <section className={styles.voter}>
         <button
           id={1}
           onClick={this.handleVote}
@@ -36,7 +37,7 @@ class Voter extends React.Component {
           Vote Down
         </button>
         <p> Votes: {this.props.votes + this.state.voteUpdate}</p>
-      </React.Fragment>
+      </section>
     );
   }
 }
