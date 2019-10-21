@@ -9,15 +9,24 @@ class ArticleList extends React.Component {
     articles: [],
     isLoading: true,
     sortQuery: null,
-    orderQuery: "desc"
+    orderQuery: "desc",
+    error: null
   };
 
   componentDidMount() {
     const { topic } = this.props;
     const { sortQuery, orderQuery } = this.state;
-    api.getArticles(topic, sortQuery, orderQuery).then(({ articles }) => {
-      this.setState({ articles, isLoading: false });
-    });
+    api
+      .getArticles(topic, sortQuery, orderQuery)
+      .then(({ articles }) => {
+        this.setState({ articles, isLoading: false, error: null });
+      })
+      .catch(error => {
+        const { msg } = error.response.data;
+        const { status } = error.response;
+
+        this.setState({ error: { status, msg } });
+      });
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -44,20 +53,18 @@ class ArticleList extends React.Component {
 
   render() {
     const { articles, isLoading } = this.state;
-    if (isLoading) {
-      return <h2>Loading...</h2>;
-    } else
-      return (
-        <React.Fragment>
-          <Sorter updateSortQuery={this.updateSortQuery} />
-          <ArticleOrder updateOrderQuery={this.updateOrderQuery} />
-          <ul>
-            {articles.map(article => {
-              return <ArticleCard key={article.article_id} article={article} />;
-            })}
-          </ul>
-        </React.Fragment>
-      );
+    if (isLoading) return <h2>Loading...</h2>;
+    return (
+      <React.Fragment>
+        <Sorter updateSortQuery={this.updateSortQuery} />
+        <ArticleOrder updateOrderQuery={this.updateOrderQuery} />
+        <ul>
+          {articles.map(article => {
+            return <ArticleCard key={article.article_id} article={article} />;
+          })}
+        </ul>
+      </React.Fragment>
+    );
   }
 }
 

@@ -4,8 +4,8 @@ import styles from "../styles/Slider.module.css";
 
 const slideImages = [
   "https://images.readwrite.com/wp-content/uploads/2018/04/coding-825x500.jpg",
-  "images/slide_3.jpg",
-  "images/slide_4.jpg"
+  "https://www.wallpaperup.com/uploads/wallpapers/2015/11/08/831551/470f80c7a28a39a9d797be2feca068ef-700.jpg",
+  "https://static01.nyt.com/images/2017/09/25/dining/bonebrothchickenstock/bonebrothchickenstock-articleLarge.jpg"
 ];
 
 const properties = {
@@ -13,10 +13,10 @@ const properties = {
   transitionDuration: 500,
   infinite: true,
   indicators: true,
-  arrows: true,
-  onChange: (oldIndex, newIndex) => {
-    console.log(`slide transition from ${oldIndex} to ${newIndex}`);
-  }
+  arrows: true
+  // onChange: (oldIndex, newIndex) => {
+  //   console.log(`slide transition from ${oldIndex} to ${newIndex}`);
+  // }
 };
 
 const Slideshow = () => {
@@ -27,22 +27,19 @@ const Slideshow = () => {
           <div
             className={styles.img}
             style={{ backgroundImage: `url(${slideImages[0]})` }}
-          >
-            <span>Slide 1</span>
-          </div>
+          ></div>
         </div>
         <div className={styles.slide}>
           <div
             className={styles.img}
             style={{ backgroundImage: `url(${slideImages[1]})` }}
-          >
-            <span>Slide 2</span>
-          </div>
+          ></div>
         </div>
         <div className={styles.slide}>
-          <div style={{ backgroundImage: `url(${slideImages[2]})` }}>
-            <span>Slide 3</span>
-          </div>
+          <div
+            className={styles.img}
+            style={{ backgroundImage: `url(${slideImages[2]})` }}
+          ></div>
         </div>
       </Slide>
     </div>

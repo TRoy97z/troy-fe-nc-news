@@ -38,6 +38,7 @@ class CommentForm extends React.Component {
             placeholder="Any thoughts?"
             onChange={this.handleChange}
             value={this.state.body}
+            required
           />
         </label>
         <button>Submit</button>

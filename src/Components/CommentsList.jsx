@@ -6,12 +6,13 @@ import styles from "../styles/CommentCard.module.css";
 
 class CommentsList extends React.Component {
   state = {
-    comments: []
+    comments: [],
+    isLoading: true
   };
   componentDidMount() {
     const { article_id } = this.props;
     api.getCommentsByArticleId(article_id).then(comments => {
-      this.setState({ comments });
+      this.setState({ comments, isLoading: false });
     });
   }
 
@@ -27,8 +28,9 @@ class CommentsList extends React.Component {
   };
 
   render() {
-    const { comments } = this.state;
+    const { comments, isLoading } = this.state;
     const { article_id } = this.props;
+    if (isLoading) return <h2>Loading...</h2>;
     return (
       <section className={styles.list}>
         <CommentForm article_id={article_id} addComment={this.addComment} />

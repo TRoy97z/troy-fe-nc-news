@@ -26,7 +26,7 @@ class ArticleCard extends React.Component {
         <div className={styles.votes}>
           <Voter votes={votes} article_id={article_id} />
         </div>
-        <p>Comments: {comment_count}</p>
+        <p>Comments({comment_count})</p>
         <h5>
           Posted By: {author} | <Moment date={created_at} fromNow />
         </h5>

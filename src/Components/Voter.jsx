@@ -36,7 +36,7 @@ class Voter extends React.Component {
         >
           Vote Down
         </button>
-        <p> Votes: {this.props.votes + this.state.voteUpdate}</p>
+        <p> Votes({this.props.votes + this.state.voteUpdate})</p>
       </section>
     );
   }
