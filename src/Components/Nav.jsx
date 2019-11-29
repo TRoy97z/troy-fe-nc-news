@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "@reach/router";
 import * as api from "../utils/api";
+import styles from "../styles/Header.module.css";
 
 class Nav extends React.Component {
   state = {
@@ -17,7 +18,7 @@ class Nav extends React.Component {
   render() {
     const { topics, username } = this.state;
     return (
-      <nav>
+      <nav className={styles.navbar}>
         <Link to="/">Home </Link>
         <Link to="/articles">Articles </Link>
         {topics.map(topic => {

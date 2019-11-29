@@ -3,6 +3,7 @@ import ArticleCard from "./ArticleCard";
 import * as api from "../utils/api";
 import Sorter from "./Sorter";
 import ArticleOrder from "./ArticleOrder";
+import ErrorHandler from "./ErrorHandler";
 
 class ArticleList extends React.Component {
   state = {
@@ -22,10 +23,9 @@ class ArticleList extends React.Component {
         this.setState({ articles, isLoading: false, error: null });
       })
       .catch(error => {
-        const { msg } = error.response.data;
         const { status } = error.response;
-
-        this.setState({ error: { status, msg } });
+        const { msg } = error.response.data;
+        this.setState({ error: { status, msg }, isLoading: false });
       });
   }
 
@@ -37,9 +37,16 @@ class ArticleList extends React.Component {
       prevState.sortQuery !== sortQuery ||
       prevState.orderQuery !== orderQuery
     ) {
-      api.getArticles(topic, sortQuery, orderQuery).then(({ articles }) => {
-        this.setState({ articles: articles, isLoading: false });
-      });
+      api
+        .getArticles(topic, sortQuery, orderQuery)
+        .then(({ articles }) => {
+          this.setState({ articles: articles, isLoading: false });
+        })
+        .catch(error => {
+          const { status } = error.response;
+          const { msg } = error.response.data;
+          this.setState({ error: { status, msg }, isLoading: false });
+        });
     }
   }
 
@@ -52,8 +59,9 @@ class ArticleList extends React.Component {
   };
 
   render() {
-    const { articles, isLoading } = this.state;
+    const { articles, isLoading, error } = this.state;
     if (isLoading) return <h2>Loading...</h2>;
+    if (error) return <ErrorHandler status={error.status} msg={error.msg} />;
     return (
       <React.Fragment>
         <Sorter updateSortQuery={this.updateSortQuery} />

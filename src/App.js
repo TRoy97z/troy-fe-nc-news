@@ -7,6 +7,7 @@ import Home from "./Components/Home";
 import ArticleList from "./Components/ArticlesList";
 import SingleArticle from "./Components/SingleArticle";
 import User from "./Components/User";
+import EndpointError from "./Components/EndpointError";
 
 class App extends React.Component {
   render() {
@@ -20,6 +21,7 @@ class App extends React.Component {
           <ArticleList path="/articles/topics/:topic" />
           <SingleArticle path="/articles/:article_id" />
           <User path="/users/:username" />
+          <EndpointError default />
         </Router>
       </main>
     );

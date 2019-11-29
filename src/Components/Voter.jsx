@@ -1,6 +1,5 @@
 import React from "react";
 import * as api from "../utils/api";
-import styles from "../styles/ArticleCard.module.css";
 
 class Voter extends React.Component {
   state = { voteUpdate: 0 };
@@ -21,7 +20,7 @@ class Voter extends React.Component {
 
   render() {
     return (
-      <section className={styles.voter}>
+      <section>
         <button
           id={1}
           onClick={this.handleVote}
